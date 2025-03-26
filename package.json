@@ -3,17 +3,16 @@
     "version": "10.1.0",
     "private": true,
     "scripts": {
-        "dev": "cross-env copy .env.development .env && next dev",
-        "prod": "cross-env copy .env.production .env && npm run build && next start",
+        "dev": "copy .env.development .env && next dev --turbo",
+        "prod": "cp .env.production .env && next dev --turbo",
         "build": "next build",
-        "build_dev": "cross-env COPY .env.development .env && next build",
-        "build_prod": "cross-env COPY .env.production .env && next build",
+        "build_dev": "cp .env.development .env && next build",
+        "build_prod": "cp .env.production .env && next build",
         "start": "next start",
         "format": "prettier --write \"{app,demo,layout,types}/**/*.{js,ts,tsx,d.ts}\"",
         "lint": "next lint"
     },
-
-"dependencies": {
+    "dependencies": {
         "@emotion/react": "^11.13.5",
         "@emotion/styled": "^11.13.5",
         "@heroicons/react": "^2.2.0",
@@ -29,6 +28,7 @@
         "axios": "^1.7.8",
         "chart.js": "4.2.1",
         "cookies-next": "^4.3.0",
+        "cross-env": "^7.0.3",
         "framer-motion": "^11.15.0",
         "js-cookie": "^3.0.5",
         "jsonwebtoken": "^9.0.2",

@@ -113,10 +113,20 @@ const IdentityPage = () => {
 
     function handleTaxCode(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;
-        if (value === '' || /^[0-9]+$/.test(value)) {
+        // Cho phép nhập cả khi giá trị rỗng
+        if (value === '' || /^[0-9]*$/.test(value)) {
             setTaxCode(value);
+            setErrorMessages((prev: any) => ({ ...prev, taxCode: '' })); // Xóa lỗi nếu nhập đúng
         }
     }
+
+    function handleCardID(e: React.ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
+        setCardID(value);
+        setErrorMessages((prev: any) => ({ ...prev, cardID: '' })); // Xóa lỗi khi nhập đúng
+    }
+
+
 
     function handleBack() {
         router.back();
@@ -221,7 +231,15 @@ const IdentityPage = () => {
                             {t('citizenIdentification')}
                         </label>
                         <div className="flex flex-col gap-1">
-                            <InputText id="cardID1" value={cardID} type="text" placeholder={t('cardID')} className="w-full md:w-30rem border-2 bg-[#E8F0FE]" style={{ padding: '0.5rem' }} disabled />
+                            <InputText
+                                id="cardID1"
+                                value={cardID}
+                                onChange={(e) => setCardID(e.target.value)} // Thêm sự kiện onChange
+                                type="text"
+                                placeholder={t('cardID')}
+                                className="w-full md:w-30rem border-2 bg-[#E8F0FE]"
+                                style={{ padding: '0.5rem' }}
+                            />
                             <small className="text-xs text-red-500 italic">{errorMessages.cardID}</small>
                         </div>
                     </div>
